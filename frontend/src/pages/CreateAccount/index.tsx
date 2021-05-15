@@ -3,30 +3,34 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
+const CreateAccount: React.FC = () => {
+  function handleCreate() {
+    toast.info('Handle Create')
+  }
 
-const Login: React.FC = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleLogin(e: FormEvent) {
-    e.preventDefault();
-    toast.info('Hello');
-  }
-
   return (
-    <div className="container-login">
-      <section id="left-section">
-        <h1>
-          <span>Manager</span>
-          <span>Your</span>
-          <span>Business</span>
-        </h1>
-      </section>
-      <section id="right-section">
-        <form action="">
+    <div className="create-account-container">
+      <div />
+      <section>
+        <form>
           <fieldset>
-            <legend>Realize o seu Login</legend>
+            <legend>Realize o seu cadastro</legend>
             <div className="separator light"></div>
+
+            <div className="input-wrapper">
+              <label htmlFor="name">Nome</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </div>
 
             <div className="input-wrapper">
               <label htmlFor="name">Email</label>
@@ -50,14 +54,14 @@ const Login: React.FC = () => {
               />
             </div>
           </fieldset>
-          <button className="button-access" onClick={handleLogin} onTouchStart={handleLogin}>
-            Acessar
+          <button className="button-create" onClick={handleCreate}>
+            Cadastrar
             </button>
-          <a href="/create-account">Não possui conta? Crie uma!</a>
+          <a href="/">Já possuo uma conta!</a>
         </form>
       </section>
     </div>
   );
 }
 
-export default Login;
+export default CreateAccount;

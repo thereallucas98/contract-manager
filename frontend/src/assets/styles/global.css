@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&family=Ubuntu:wght@300;400;500&display=swap');
 
 * {
   margin: 0;
@@ -6,7 +7,7 @@
 }
 
 :root {
-  --color-background: #F0F2F5;
+  --color-background: #F0F0F7;
   --color-text: #FCFDFF;
 
   --color-primary: #000814;
@@ -34,7 +35,9 @@
   --color-badge-done-text: var(--color-delete);
   --color-badge-done-background:#FAECEB;
 
-  --color-header-inner-title: var(--color-card-label)
+  --color-header-inner-title: var(--color-card-label);
+  --color-secundary: #04D361;
+  --color-secundary-dark: #04BF58;
 }
 
 html::-webkit-scrollbar {
@@ -57,7 +60,7 @@ body {
 
 body,
 textarea {
-  font: 500 1rem Inter;
+  font: 300 1rem Roboto Condensed;
   color: var(--color-text);
   border: none;
 }
@@ -65,7 +68,7 @@ textarea {
 input,
 button,
 textarea {
-  font: 500 1rem Inter;
+  font: 400 1rem Roboto Condensed;
   color: var(--color-card-label);
   border: none;
 }
