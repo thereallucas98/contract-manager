@@ -1,0 +1,167 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-background: #F0F2F5;
+  --color-text: #FCFDFF;
+
+  --color-primary: #000814;
+  --color-secondary: #003566;
+  --color-secondary-hover: #0077b6;
+  
+  --color-input-background: #001D3D;
+  --color-button-text: #FFFFFF;
+  --color-button-secondary-text: #FFC300;
+  --color-button-hover: #FFD60A;
+  --color-hairline-in-dark: #0077b6;
+  --color-hairline-in-light: #E1E3E5;
+
+  --color-card-background: var(--color-text);
+  --color-card-title: #0077b6;
+  --color-card-label: #BFBFCC;
+  --color-card-content: #E81D2C;
+
+  --color-cancel: #E1E3E5;
+  --color-delete: #EB3B35; 
+  --color-save: #36B336;
+  
+  --color-badge-progress-text: var(--color-save);
+  --color-badge-progress-background: #E8F8E8;
+  --color-badge-done-text: var(--color-delete);
+  --color-badge-done-background:#FAECEB;
+
+  --color-header-inner-title: var(--color-card-label)
+}
+
+html::-webkit-scrollbar {
+  width: 10px; 
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--color-text);
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+}
+
+
+/* tags styling */
+body {
+  background: var(--color-background);
+}
+
+body,
+textarea {
+  font: 500 1rem Inter;
+  color: var(--color-text);
+  border: none;
+}
+
+input,
+button,
+textarea {
+  font: 500 1rem Inter;
+  color: var(--color-card-label);
+  border: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 140px;
+  max-height: 250px;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* basic classes */
+
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
+.separator {
+  height: 1px;
+  background-color: var(--color-hairline-in-dark);
+  margin: 1rem 0;
+}
+
+.separator.light {
+  background-color: #E1E3E5;
+}
+
+.flex {
+  display: flex;
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(35px)
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  } 
+}
+
+.animate-up {
+  transform: translateY(35px);
+  opacity: 0;
+
+  animation: up 200ms forwards;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0);
+
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.animate-pop {
+  transform: scale(0);
+  opacity: 0;
+
+  animation: pop 300ms forwards;
+}
+
+.reverse {
+  animation-direction: reverse;
+}
+
+.back {
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.delay-1 {
+  animation-delay: 100ms;
+}
+
+.delay-2 {
+  animation-delay: 200ms;
+}
