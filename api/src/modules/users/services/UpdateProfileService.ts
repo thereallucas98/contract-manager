@@ -8,6 +8,7 @@ interface IRequest {
   user_id: string;
   name: string;
   email: string;
+  type: number;
   password?: string;
   old_password?: string;
 }
@@ -17,6 +18,7 @@ class UpdateProfileService {
     user_id,
     name,
     email,
+    type,
     password,
     old_password,
   }: IRequest): Promise<User> {
@@ -50,6 +52,7 @@ class UpdateProfileService {
 
     user.name = name;
     user.email = email;
+    user.type = type;
 
     await usersRepository.save(user);
 
