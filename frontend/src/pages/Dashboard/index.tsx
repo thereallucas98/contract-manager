@@ -4,7 +4,7 @@ import SidebarMenu from '../../components/SidebarMenu';
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <SidebarMenu />
+      <SidebarMenu currentPathName={window.location.pathname} />
       <h1>Dashboard Page</h1>
     </div>
   );

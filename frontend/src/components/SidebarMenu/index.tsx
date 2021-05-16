@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { FiHome, FiUser, FiSettings, FiLogOut } from 'react-icons/fi';
 import './styles.css';
 
-const SidebarMenu: React.FC = () => {
+interface SidebarMenuProps {
+  currentPathName: string;
+}
+
+const SidebarMenu: React.FC<SidebarMenuProps> = ({ currentPathName }) => {
   return (
     <div className="sidebar-menu">
       <section className="profile-photo">
@@ -11,17 +15,17 @@ const SidebarMenu: React.FC = () => {
       </section>
       <section className="options-menu">
         <div className="paths">
-          <Link to="/dashboard">
+          <Link to="/dashboard" className={currentPathName === '/dashboard' ? 'selected' : ''}>
             <FiHome size={30} />
             Início
           </Link>
 
-          <Link to="/customers">
+          <Link to="/customers" className={currentPathName === '/customers' ? 'selected' : ''}>
             <FiUser size={30} />
             Clientes
           </Link>
 
-          <Link to="/profile">
+          <Link to="/profile" className={currentPathName === '/profile' ? 'selected' : ''}>
             <FiSettings size={30} />
             Meu Perfil
           </Link>
