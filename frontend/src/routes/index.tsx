@@ -6,8 +6,8 @@ import AuthRoutes from './auth.routes';
 const Routes: React.FC = () => {
   return (
     <BrowserRouter>
-      {/* <AppRoutes /> */}
-      <AuthRoutes />
+      <AppRoutes />
+      {/* <AuthRoutes /> */}
     </BrowserRouter>
   );
 }
