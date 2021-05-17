@@ -243,7 +243,7 @@ const Customers: React.FC = () => {
                 <Select
                   name="type"
                   label="Viabilidade"
-                  title={type === '1' ? 'Filtro inexistente na Tabela de Clientes' : 'Realize o Filtro por Viabilidade'} 
+                  title={type === '1' ? 'Filtro inexistente na Tabela de Clientes' : 'Realize o Filtro por Viabilidade'}
                   options={[
                     { value: 1, label: 'Visibilidade Baixa' },
                     { value: 2, label: 'Visibilidade Moderada Baixa' },
@@ -259,7 +259,7 @@ const Customers: React.FC = () => {
                 <Select
                   name="type"
                   label="Situação"
-                  title={type === '1' ? 'Filtro inexistente na Tabela de Clientes' : 'Realize o Filtro por Situação'} 
+                  title={type === '1' ? 'Filtro inexistente na Tabela de Clientes' : 'Realize o Filtro por Situação'}
                   options={[
                     { value: 0, label: 'Planejado' },
                     { value: 1, label: 'Em Desenvolvimento' },
@@ -301,13 +301,21 @@ const Customers: React.FC = () => {
                 {
                   type === '1' ? (
                     <tr>
-                  {/* <th scope="col">Código</th> */}
-                  <th scope="col">Nome</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">#</th>
-                </tr>
+                      {/* <th scope="col">Código</th> */}
+                      <th scope="col">Nome</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">#</th>
+                    </tr>
                   ) : (
-                    <span>Tabela Contratos</span>
+                    <tr>
+                      <th scope="col">Código</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Viabilidade</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Cliente</th>
+                      <th scope="col">Previsão de Conclusão</th>
+                      <th scope="col">#</th>
+                    </tr>
                   )
                 }
               </thead>
@@ -335,7 +343,25 @@ const Customers: React.FC = () => {
                       );
                     })
                   ) : (
-                    <span>1</span>
+                    <tr>
+                        <td data-label="Código">ABDC</td>
+                        <td data-label="Nome">TESTE</td>
+                        <td data-label="Viabilidade">ALTA</td>
+                        <td data-label="Status">EM ANDAMENTO</td>
+                        <td data-label="Cliente">STEVE ROGERS</td>
+                        <td data-label="Previsão de Conclusão">20/10/2021</td>
+                        <td date-label="#">
+                          <button className="actions-buttons" title="Visualização Detalhada">
+                            <FiEye size={25} />
+                          </button>
+                          <button className="actions-buttons" title="Editar Contrato">
+                            <FiEdit size={25} />
+                          </button>
+                          <button className="actions-buttons" title="Excluir Contrato">
+                            <FiDelete size={25} />
+                          </button>
+                        </td>
+                      </tr>
                   )
                 }
               </tbody>

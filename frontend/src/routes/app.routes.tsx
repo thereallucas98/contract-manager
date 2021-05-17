@@ -1,19 +1,26 @@
 import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
+import { useAuth } from '../contexts/auth';
 import CreateClient from '../pages/CreateClient';
 import Customers from '../pages/Customers';
 import Dashboard from '../pages/Dashboard';
+import Loading from '../components/Loading';
 import Profile from '../pages/Profile';
 
 const AuthRoutes: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/customers" component={Customers} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/create-client" component={CreateClient} />
-    </BrowserRouter>
-  );
+  const { loading } = useAuth();
+  if (loading) {
+    return <Loading />
+  } else {
+    return (
+      <BrowserRouter>
+        <Route path="/" exact component={Dashboard} />
+        <Route path="/customers" exact component={Customers} />
+        <Route path="/profile" exact component={Profile} />
+        <Route path="/create-client" exact component={CreateClient} />
+      </BrowserRouter>
+    );
+  }
 }
 
 export default AuthRoutes;

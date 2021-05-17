@@ -19,8 +19,6 @@ const CreateClient: React.FC = () => {
   const [number, setNumber] = useState('');
   const [complement, setComplement] = useState('');
   const [neighbor, setNeighbor] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
   const [ufs, setUfs] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
   const [selectedUf, setSelectedUf] = useState("0");

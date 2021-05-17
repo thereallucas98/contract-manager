@@ -50,6 +50,16 @@
   color: var(--color-card-title);
 }
 
+.span-click {
+  cursor: pointer;
+  transition: color 0.5s;
+}
+
+.span-click:hover {
+  text-decoration: underline;
+  color: var(--color-button-hover);
+}
+
 .container-login section#left-section span:nth-child(1) {
   background-image: linear-gradient(90deg, #007CF0, #00DFD8);
 }
