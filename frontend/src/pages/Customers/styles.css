@@ -67,6 +67,93 @@
   color: var(--color-button-text);
 }
 
+.customer-content section {
+  height: calc(50vh - 5rem);
+  overflow-y: scroll;
+}
+
+.customer-content section::-webkit-scrollbar {
+  width: 10px;
+}
+
+.customer-content section::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 6px;
+}
+
+
+.customer-content table {
+  border: 1px solid #CCC;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  background: var(--color-button-text);
+}
+
+.customer-content table caption{
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+.customer-content table tr{
+  background-color: var(--color-secondary);
+  border: 0.15rem solid #0077b6;
+  padding: .35em;
+}
+
+.customer-content table th,
+.customer-content table td{
+  padding: .62em;
+  text-align: center;
+}
+
+.customer-content table th{
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.customer-content table .actions-buttons {
+  background: none;
+  border:0;
+  padding: 5px;
+  margin-right: 2px;
+  align-items: center;
+  display: inline-block;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.footer-buttons {
+  margin: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer-buttons .button-create {
+  height: 3rem;
+  width: 8rem;
+  background: var(--color-secundary);
+  transition: background-color 0.5s;
+  cursor: pointer;
+  margin: 0 0 1rem 1rem;
+  border-radius: 0.5rem;
+  color: #FFF;
+  font: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-buttons .button-create:hover {
+  background: var(--color-secundary-dark);
+}
+
+
 @media screen and (max-width: 768px) {
   .customer-content {
     display: flex;
@@ -77,7 +164,46 @@
     padding: 1rem 1.4rem;
   }
 
+  .customer-content table {
+    border: 0;
+  }
+
   .search-groups button.delete {
     display: none;
+  }
+
+  .customer-content table thead{
+    border:none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .customer-content table tr{
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .65em;
+  }
+
+  .customer-content table td{
+    border-bottom: 1px solid #DDD;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+
+  .customer-content table td::before{
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .customer-content table td:last-child{
+    border-bottom: 0;
   }
 }

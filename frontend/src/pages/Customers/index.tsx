@@ -1,13 +1,184 @@
 import React, { useState } from 'react';
+import { FiEye, FiEdit, FiDelete, FiPlus } from 'react-icons/fi';
 import CardHeader from '../../components/CardHeader';
 import SidebarMenu from '../../components/SidebarMenu';
 import Select from '../../components/Select';
 import './styles.css';
-import Table from '../../components/Table';
+import { Link } from 'react-router-dom';
 
 const Customers: React.FC = () => {
+  const data = [
+    {
+      "id": 1,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 2,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 3,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 4,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 5,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 6,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 7,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 8,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 9,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 10,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 11,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 12,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 13,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 14,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 15,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 16,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 17,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    },
+    {
+      "id": 18,
+      "code": "A12",
+      "name": "Contrato de Compra",
+      "viability": "Viabilidade Alta",
+      "status": "Em Andamento",
+      "client": "Governo Federal",
+      "expected_finished_data": "10/02/2020",
+    }
+  ]
   const [viability, setViability] = useState('');
   const [status, setStatus] = useState('');
+  const [type, setType] = useState('');
+
+  // const [contractPerPage, setContractPerPage] = useState(5);
+  // const [offSet, setOffSet] = useState(1);
+  // const [contracts, setContracts] = useState([]);
+  // const [pageCount, setPageCount] = useState(0);
 
   return (
     <div>
@@ -22,6 +193,18 @@ const Customers: React.FC = () => {
         <main>
           <div className="search-groups">
             <div className="select-group">
+            <div className="select-wrapper">
+                <Select
+                  name="type"
+                  label="Tipo"
+                  options={[
+                    { value: 1, label: 'Clientes' },
+                    { value: 2, label: 'Contratos' },
+                  ]}
+                  value={type}
+                  onChange={e => setType(e.target.value)}
+                />
+              </div>
               <div className="select-wrapper">
                 <Select
                   name="type"
@@ -77,8 +260,51 @@ const Customers: React.FC = () => {
             </div>
           </div>
           <section>
-            <Table />
+            <table className="table-customers">
+              <thead>
+                <tr>
+                  <th scope="col">Código</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Viabilidade</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Previsão de Conclusão</th>
+                  <th scope="col">#</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  data.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td data-label="Código">{item.code}</td>
+                        <td data-label="Nome">{item.name}</td>
+                        <td data-label="Viabilidade">{item.viability}</td>
+                        <td data-label="Status">{item.status}</td>
+                        <td data-label="Cliente">{item.client}</td>
+                        <td data-label="Previsão de Conclusão">{item.expected_finished_data}</td>
+                        <td date-label="#">
+                          <button className="actions-buttons" title="Visualização Detalhada">
+                            <FiEye size={25} />
+                          </button>
+                          <button className="actions-buttons" title="Editar Contrato">
+                            <FiEdit size={25} />
+                          </button>
+                          <button className="actions-buttons" title="Excluir Contrato">
+                            <FiDelete size={25} />
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
           </section>
+          <div className="footer-buttons">
+            <Link to="create-client" className="button-create">Adicionar Cliente</Link>
+            <button className="button-create">Adicionar Contrato</button>
+          </div>
         </main>
       </div>
     </div>
