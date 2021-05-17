@@ -104,3 +104,31 @@
 .client-content button:hover {
   background: var(--color-secundary-dark);
 }
+
+@media screen and (max-width: 768px) {
+  .client-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 1rem 1rem;
+  }
+  .client-content form {
+    justify-content: center;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .client-content form .left-side {
+    margin: 0;
+  }
+  .client-content form .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .client-content form .input-wrapper {
+    width: 100% !important;
+  }
+}

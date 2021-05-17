@@ -32,6 +32,16 @@
   margin-left: 1.5rem;
 }
 
+.not-allowed-change {
+  cursor: not-allowed;
+  display: none;
+}
+
+.allowed-selects {
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
 /* .search-groups button.button .delete {
   background: var();
 } */
@@ -68,7 +78,7 @@
 }
 
 .customer-content section {
-  height: calc(50vh - 5rem);
+  height: calc(70vh - 7rem);
   overflow-y: scroll;
 }
 
@@ -124,6 +134,57 @@
   display: inline-block;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  width: auto;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
+  color: #0077b6;
+}
+
+.pagination-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pagination-button svg {
+  background-color: var(--color-button-secondary-text);
+  color: #FFF;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.item {
+  margin: 0 0.2rem;
+  cursor: pointer;
+  background: var(--select-page);
+  color: #FFF;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+}
+
+.selected-page {
+  height: 2rem;
+  width: 2rem;
+  background: var(--color-secondary-hover);
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
 }
 
 .footer-buttons {

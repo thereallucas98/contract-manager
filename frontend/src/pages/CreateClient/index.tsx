@@ -143,7 +143,7 @@ const CreateClient: React.FC = () => {
               />
             </div>
             <div className="input-group">
-              <div className="input-wrapper" style={{ width: '30%', marginRight: 5}}>
+              <div className="input-wrapper" style={{ width: '30%', marginRight: 5 }}>
                 <label htmlFor="uf">Estado</label>
                 <select
                   name="uf"
