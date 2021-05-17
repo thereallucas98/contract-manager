@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import CountCustomersService from '../services/CountCustomersService';
 import CreateCustomerService from '../services/CreateCustomerService';
 import DeleteCustomerService from '../services/DeleteCustomerService';
 import ListCustomerService from '../services/ListCustomerService';
@@ -8,10 +9,20 @@ import UpdateCustomerService from '../services/UpdateCustomerService';
 export default class CustomersController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listCustomers = new ListCustomerService();
+    const countCustomers = new CountCustomersService();
+    const { take = 10, skip = 1 } = request.query;
 
-    const customers = await listCustomers.execute();
+    const customers = await listCustomers.execute({
+      take,
+      skip,
+    });
 
-    return response.json(customers);
+    const total = await countCustomers.execute();
+
+    return response.json({
+      customers,
+      total,
+    });
   }
 
   public async show(request: Request, response: Response): Promise<Response> {

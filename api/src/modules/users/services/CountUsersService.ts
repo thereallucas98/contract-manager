@@ -2,15 +2,12 @@ import { getCustomRepository } from 'typeorm';
 import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
 
-export default class ListUserService {
-  public async execute({ take, skip }): Promise<User[]> {
+export default class CountUsersService {
+  public async execute(): Promise<string> {
     const usersRepository = getCustomRepository(UsersRepository);
 
-    const users = usersRepository.find({
-      take,
-      skip,
-    });
+    const total = usersRepository.count();
 
-    return users;
+    return (await total).toString();
   }
 }

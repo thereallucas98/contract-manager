@@ -1,14 +1,27 @@
 import { Request, Response } from 'express';
 import CreateUserService from '../services/CreateUserService';
 import ListUserService from '../services/ListUserService';
+import CountUsersService from '../services/CountUsersService';
 
 export default class UsersController {
   public async show(request: Request, response: Response): Promise<Response> {
     const listUser = new ListUserService();
+    const countUsers = new CountUsersService();
+    const { take = 10, skip = 1 } = request.query;
 
-    const users = await listUser.execute();
+    const users = await listUser.execute({
+      take,
+      skip,
+    });
 
-    return response.json(users);
+    const total = await countUsers.execute();
+
+    response.header('x-total-count', total);
+
+    return response.json({
+      users,
+      total,
+    });
   }
 
   public async create(request: Request, response: Response): Promise<Response> {

@@ -1,4 +1,3 @@
-import Customer from '@modules/customers/typeorm/entities/Customer';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import Customer from '../../../customers/typeorm/entities/Customer';
 
 @Entity('contracts')
 class Contract {
