@@ -6,7 +6,7 @@ import ContractsController from '../controllers/ContractsController';
 const contractsRouter = Router();
 const contractsController = new ContractsController();
 
-contractsRouter.use(isAuthenticated);
+// contractsRouter.use(isAuthenticated);
 
 contractsRouter.get('/', contractsController.index);
 
