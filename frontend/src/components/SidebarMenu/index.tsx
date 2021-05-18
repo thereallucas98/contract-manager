@@ -15,7 +15,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ currentPathName }) => {
       </section>
       <section className="options-menu">
         <div className="paths">
-          <Link to="/dashboard" className={currentPathName === '/dashboard' ? 'selected' : ''}>
+          <Link to="/" className={currentPathName === '/' ? 'selected' : ''}>
             <FiHome size={30} />
             Início
           </Link>

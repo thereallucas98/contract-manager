@@ -1,14 +1,30 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useEffect } from 'react';
+import { useAuth } from '../../contexts/auth';
 import SidebarMenu from '../../components/SidebarMenu';
+import api from '../../services/api';
 import './styles.css';
 
 const Profile: React.FC = () => {
+  const { user } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [showChangePassword, setShowChangePassword] = useState(false);
 
+
+  useEffect(() => {
+    async function loadUserData() {
+      const response = await api.get(`profile`)
+
+      console.log(response.data);
+
+      setName(response.data.name);
+      setEmail(response.data.email);
+    };
+
+    loadUserData();
+  }, [])
 
   function handlePasswordView(e: FormEvent) {
     e.preventDefault();
@@ -24,7 +40,7 @@ const Profile: React.FC = () => {
       <div className="profile-content animate-up delay-2">
         <aside className="card-profile">
           <img src="http://github.com/thereallucas98.png" alt="David Lucas" />
-          <h2>David Lucas</h2>
+          <h2>{user?.name}</h2>
 
           <button className="button">Salvar Dados</button>
         </aside>

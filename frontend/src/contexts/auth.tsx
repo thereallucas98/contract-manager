@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { toast } from 'react-toastify';
 import history from './history';
-
 import api from '../services/api';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface User {
   id: string;
@@ -14,8 +15,8 @@ interface AuthContextData {
   loading: boolean;
   user: User | null;
   signIn: (email: string, password: string) => Promise<void>;
+  signUp: (name: string, email: string, password: string) => Promise<void>;
   signOut(): void;
-  updateProfile: (email: string, password: string, id: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -42,6 +43,28 @@ export const AuthProvider: React.FC = ({ children }) => {
     loadStorageData();
   }, [])
 
+  async function signUp(name: string, email: string, password: string) {
+    try {
+      const data = {
+        name,
+        email,
+        password,
+      }
+
+
+
+    } catch (error) {
+      if (error.response?.data) {
+        console.log(error.response.data.error);
+      }
+    }
+  }
+
+  async function loadStorageUser(user: object, token: string) {
+    await localStorage.setItem("AUTH:user", JSON.stringify(user));
+    await localStorage.setItem("AUTH:token", token);
+  }
+
   async function signIn(email: string, password: string) {
     try {
       const data = {
@@ -49,7 +72,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         password,
       };
 
-      const response = await api.post('auth', data);
+      const response = await api.post('sessions', data);
 
       const { token, user } = response.data;
 
@@ -60,7 +83,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       setUser(user);
 
-      // history.push('/dashboard');
+      history.push('/');
+      toast.info(`É muito bom ter vocẽ de volta ${user?.name}`);
     } catch (error) {
       if (error.response?.data) {
         console.log(error.response.data.error);
@@ -77,43 +101,13 @@ export const AuthProvider: React.FC = ({ children }) => {
     history.push('/');
   }
 
-  async function updateProfile(name: string, email: string, id: string) {
-    // const data = {
-    //   name,
-    //   email,
-    //   id
-    // }
-
-    const response = await api.patch(`/user/${id}`, {
-      name,
-      email,
-    });
-
-    console.log(response.data);
-
-    const user = {
-      id: response.data.id,
-      name: response.data.name,
-      email: response.data.email,
-      password: response.data.password,
-      can_create: response.data.can_create,
-      created_at: response.data.create_at
-    }
-
-    console.log(user);
-
-    // console.log(user);
-
-    setUser(user);
-  }
-
-  return(
+  return (
     <AuthContext.Provider value={{
       signed: !!user,
       user,
       signIn,
+      signUp,
       signOut,
-      updateProfile,
       loading,
     }}>
       {children}

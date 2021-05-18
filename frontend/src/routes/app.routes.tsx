@@ -6,6 +6,7 @@ import Customers from '../pages/Customers';
 import Dashboard from '../pages/Dashboard';
 import Loading from '../components/Loading';
 import Profile from '../pages/Profile';
+import CreateContract from '../pages/CreateContract';
 
 const AuthRoutes: React.FC = () => {
   const { loading } = useAuth();
@@ -18,6 +19,7 @@ const AuthRoutes: React.FC = () => {
         <Route path="/customers" exact component={Customers} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/create-client" exact component={CreateClient} />
+        <Route path="/create-contract" exact component={CreateContract} />
       </BrowserRouter>
     );
   }

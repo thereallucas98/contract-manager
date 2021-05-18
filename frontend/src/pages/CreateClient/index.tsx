@@ -1,7 +1,10 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import SidebarMenu from '../../components/SidebarMenu';
+import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
+import api from '../../services/api';
 
 interface IBGEUFResponse {
   sigla: string;
@@ -55,10 +58,49 @@ const CreateClient: React.FC = () => {
   function handleSelectCity(event: ChangeEvent<HTMLSelectElement>) {
     setSelectedCity(event.target.value);
   }
+
+  async function handleCreateClient(e: FormEvent) {
+    e.preventDefault();
+
+    const result = [name, email, phone, street, number, neighbor].every(e => e === '');
+    
+    if (result === true || selectedCity === '0' || selectedUf === '0') {
+      toast.error('Alguns campos importantes se encontram vazio, por favor verifique!');
+    }
+
+    const data = {
+      name,
+      email,
+      phone,
+      street,
+      number,
+      neighbor,
+      complement,
+      city: selectedCity,
+      state: selectedUf,
+    }
+
+    await api.post('customers', data).then(() => {
+      toast.success(`Cliente ${name} cadastrado com sucesso.`)
+    }).catch((error) => {
+      toast.error(error);
+    })
+    
+    setName('');
+    setEmail('');
+    setPhone('');
+    setStreet('');
+    setNumber('');
+    setComplement('');
+    setNeighbor('');
+    setSelectedCity('0');
+    setSelectedUf('0');
+
+  }
   return (
     <>
       <SidebarMenu currentPathName="/customers" />
-      <div className="client-content">
+      <div className="client-content animate-up delay-2">
         <form>
           <fieldset className="left-side">
             <legend>Dados Pessoais</legend>
@@ -176,7 +218,7 @@ const CreateClient: React.FC = () => {
             </div>
           </fieldset>
         </form>
-        <button>Cadastrar</button>
+        <button onClick={handleCreateClient}>Cadastrar</button>
       </div>
     </>
   );

@@ -6,193 +6,27 @@ import Select from '../../components/Select';
 import api from '../../services/api';
 import './styles.css';
 
-interface IContract {
+interface ICustomer {
   id: string;
   name: string;
   email: string;
-  password: string;
-  type: number;
-  avatar: object | null;
 }
 
 const Customers: React.FC = () => {
-  // const data = [
-  //   {
-  //     "id": 1,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 2,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 3,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 4,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 5,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 6,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 7,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 8,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 9,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 10,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 11,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 12,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 13,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 14,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 15,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 16,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 17,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   },
-  //   {
-  //     "id": 18,
-  //     "code": "A12",
-  //     "name": "Contrato de Compra",
-  //     "viability": "Viabilidade Alta",
-  //     "status": "Em Andamento",
-  //     "client": "Governo Federal",
-  //     "expected_finished_data": "10/02/2020",
-  //   }
-  // ]
+
   const [viability, setViability] = useState('');
   const [status, setStatus] = useState('');
   const [type, setType] = useState('1');
 
-  const [contracts, setContracts] = useState([]);
+  const [customers, setCustomers] = useState([]);
   const [total, setTotal] = useState(0);
   const [limit, setLimit] = useState(5);
   const [pages, setPages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    async function loadContracts() {
-      const response = await api.get(`users?take=${limit}&skip=${currentPage}`
+    async function loadCustomers() {
+      const response = await api.get(`customers?take=${limit}&skip=${currentPage}`
       );
       console.log(response);
       console.log(response.headers)
@@ -205,11 +39,11 @@ const Customers: React.FC = () => {
       }
 
       setPages(arrayPages as []);
-      setContracts(response.data.users);
-      console.log(response.data.users);
+      setCustomers(response.data.customers);
+      console.log(response.data.customers);
     }
 
-    loadContracts();
+    loadCustomers();
   }, [currentPage, limit, total]);
 
   const limits = useCallback((e) => {
@@ -220,7 +54,7 @@ const Customers: React.FC = () => {
   return (
     <div>
       <SidebarMenu currentPathName={window.location.pathname} />
-      <div className="customer-content">
+      <div className="customer-content animate-up delay-2">
         <header className="card-headers">
         </header>
         <main>
@@ -322,12 +156,12 @@ const Customers: React.FC = () => {
               <tbody>
                 {
                   type === '1' ? (
-                    contracts.map((contract: IContract) => {
+                    customers.map((customer: ICustomer) => {
                       return (
-                        <tr key={contract.id}>
-                          {/* <td data-label="Código">{contract.id}</td> */}
-                          <td data-label="Nome">{contract.name}</td>
-                          <td data-label="Email">{contract.email}</td>
+                        <tr key={customer.id}>
+                          {/* <td data-label="Código">{customer.id}</td> */}
+                          <td data-label="Nome">{customer.name}</td>
+                          <td data-label="Email">{customer.email}</td>
                           <td date-label="#">
                             <button className="actions-buttons" title="Visualização Detalhada">
                               <FiEye size={25} />
@@ -393,7 +227,7 @@ const Customers: React.FC = () => {
           </div>
           <div className="footer-buttons">
             <Link to="create-client" className="button-create">Adicionar Cliente</Link>
-            <button className="button-create">Adicionar Contrato</button>
+            <Link to="create-contract" className="button-create">Adicionar Contrato</Link>
           </div>
         </main>
       </div>

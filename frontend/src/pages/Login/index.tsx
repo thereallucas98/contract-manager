@@ -1,18 +1,32 @@
 import React, { useState, FormEvent } from 'react';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../contexts/auth';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
-
 const Login: React.FC = () => {
-  const [option, setOption] = useState('1');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { signIn } = useAuth();
 
-  function handleLogin(e: FormEvent) {
+  const [option, setOption] = useState('1');
+  const [nameLogin, setNameLogin] = useState('');
+  const [nameCreate, setNameCreate] = useState('');
+  const [emailLogin, setEmailLogin] = useState('');
+  const [emailCreate, setEmailCreate] = useState('');
+  const [passwordLogin, setPasswordLogin] = useState('');
+  const [passwordCreate, setPasswordCreate] = useState('');
+
+  async function handleLogin(e: FormEvent) {
     e.preventDefault();
-    toast.info('Hello');
+    if (emailLogin === '' || passwordLogin === '') {
+      toast.error('Campos vazios, por favor verifique!');
+    }
+
+    await signIn(emailLogin, passwordLogin);
+  }
+
+  async function handleCreate(e: FormEvent) {
+    e.preventDefault();
+    toast.info('Create')
   }
 
   return (
@@ -38,8 +52,8 @@ const Login: React.FC = () => {
                     type="text"
                     id="email"
                     name="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    value={emailLogin}
+                    onChange={e => setEmailLogin(e.target.value)}
                   />
                 </div>
                 <div className="input-wrapper">
@@ -49,8 +63,8 @@ const Login: React.FC = () => {
                     type="password"
                     id="password"
                     name="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    value={passwordLogin}
+                    onChange={e => setPasswordLogin(e.target.value)}
                   />
                 </div>
               </fieldset>
@@ -71,8 +85,8 @@ const Login: React.FC = () => {
                     type="text"
                     id="name"
                     name="name"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
+                    value={nameCreate}
+                    onChange={e => setNameCreate(e.target.value)}
                   />
                 </div>
 
@@ -82,8 +96,8 @@ const Login: React.FC = () => {
                     type="text"
                     id="email"
                     name="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    value={emailCreate}
+                    onChange={e => setEmailCreate(e.target.value)}
                   />
                 </div>
                 <div className="input-wrapper">
@@ -93,12 +107,12 @@ const Login: React.FC = () => {
                     type="password"
                     id="password"
                     name="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    value={passwordCreate}
+                    onChange={e => setPasswordCreate(e.target.value)}
                   />
                 </div>
               </fieldset>
-              <button className="button-access">
+              <button className="button-access" onClick={handleCreate}>
                 Cadastrar
             </button>
               <span className="span-click" onClick={() => setOption('1')}>Já possuo uma conta!</span>

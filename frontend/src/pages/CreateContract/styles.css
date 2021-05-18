@@ -1,0 +1,131 @@
+.creact-contract-content {
+  margin-left: 10rem;
+  /* padding: 0; */
+  /* padding: 1rem 1.4rem; */
+}
+
+.creact-contract-content form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  /* padding: 4rem 2rem; */
+}
+
+.creact-contract-content form fieldset {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.creact-contract-content form fieldset section {
+  margin:0 1rem;
+}
+
+.creact-contract-content form fieldset section:last-child() {
+  margin-top: -10rem;
+}
+
+.creact-contract-content form fieldset + fieldset {
+  /* margin-top: 3.5rem; */
+}
+
+.creact-contract-content form fieldset legend {
+  color: var(--color-card-title);
+
+  font-family: Roboto Condensed;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 2.625rem;
+}
+
+.creact-contract-content form .input-group {
+  display: flex;
+  margin-top: 1.5rem;
+}
+
+.creact-contract-content form .input-wrapper {
+  margin-top: 1.5rem;
+}
+
+.creact-contract-content form .input-group .input-wrapper + .input-wrapper {
+  margin-left: 1.5rem;
+}
+
+.creact-contract-content label {
+  display: inline-block;
+
+  font-family: Roboto Condensed;
+  font-weight: 500;
+  color: #787880;
+
+  margin-bottom: 1rem;
+}
+
+.creact-contract-content input,
+.creact-contract-content select,
+.creact-contract-content textarea {
+  font-family: Roboto Condensed;
+  font-weight: 500;
+
+  height: 3rem;
+
+  background: #FCFDFF;
+
+  border: 1px solid #E1E3E6;
+  border-radius: .313rem;
+
+  padding: 0.75rem 1.5rem;
+
+  width: 100%;
+
+  color: var(--color-card-label);
+  margin-bottom: 1rem;
+}
+.creact-contract-content p {
+  color: var(--color-primary);
+}
+
+.creact-contract-content textarea {
+  max-height: 4rem;
+}
+
+.input-wrapper{
+  width: 100%;
+}
+
+.creact-contract-content button {
+  background: var(--color-secundary);
+  height: 3rem;
+  width: 10rem;
+  margin-top: 2rem;
+  transition: background-color 0.5s;
+  color: #FFF;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.creact-contract-content button:hover {
+  background: var(--color-secundary-dark);
+}
+
+@media screen and (max-width: 768px) {
+  /* .creact-contract-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 1rem 1rem;
+    height: 100vh;
+  }
+
+  .creact-contract-content form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  } */
+}
