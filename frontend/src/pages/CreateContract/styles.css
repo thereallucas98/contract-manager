@@ -1,35 +1,13 @@
 .creact-contract-content {
-  margin-left: 10rem;
-  /* padding: 0; */
-  /* padding: 1rem 1.4rem; */
-}
-
-.creact-contract-content form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  /* padding: 4rem 2rem; */
+  padding: 4rem;
 }
 
 .creact-contract-content form fieldset {
   border: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.creact-contract-content form fieldset section {
-  margin:0 1rem;
-}
-
-.creact-contract-content form fieldset section:last-child() {
-  margin-top: -10rem;
 }
 
 .creact-contract-content form fieldset + fieldset {
-  /* margin-top: 3.5rem; */
+  margin-top: 3.5rem;
 }
 
 .creact-contract-content form fieldset legend {
@@ -41,17 +19,17 @@
   line-height: 2.625rem;
 }
 
+.creact-contract-content fieldset .separator {
+  margin-bottom: 2rem;
+}
+
 .creact-contract-content form .input-group {
   display: flex;
   margin-top: 1.5rem;
 }
 
 .creact-contract-content form .input-wrapper {
-  margin-top: 1.5rem;
-}
-
-.creact-contract-content form .input-group .input-wrapper + .input-wrapper {
-  margin-left: 1.5rem;
+  margin: 1.5rem 0.1rem;
 }
 
 .creact-contract-content label {
@@ -84,12 +62,9 @@
   color: var(--color-card-label);
   margin-bottom: 1rem;
 }
-.creact-contract-content p {
-  color: var(--color-primary);
-}
 
-.creact-contract-content textarea {
-  max-height: 4rem;
+::placeholder {
+  color: var(--color-card-label);
 }
 
 .input-wrapper{
@@ -99,8 +74,7 @@
 .creact-contract-content button {
   background: var(--color-secundary);
   height: 3rem;
-  width: 10rem;
-  margin-top: 2rem;
+  width: 100%;
   transition: background-color 0.5s;
   color: #FFF;
   border-radius: 0.5rem;
@@ -111,21 +85,30 @@
   background: var(--color-secundary-dark);
 }
 
-@media screen and (max-width: 768px) {
-  /* .creact-contract-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0;
-    padding: 1rem 1rem;
-    height: 100vh;
+@media screen and (min-width: 768px) {
+  .creact-contract-content {
+    margin-left: 10rem;
   }
 
-  .creact-contract-content form {
+  .creact-contract-content form fieldset {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  } */
+    justify-content: space-around;
+  
+    padding: 0 2rem;
+  }
+
+  .creact-contract-content form fieldset section {
+    width: 100%;
+    margin: 0 1rem;
+  }
+
+  .creact-contract-content form fieldset .right {
+    margin-bottom: 9em;
+  }
+
+  .creact-contract-content button {
+    width: 10rem;
+    margin-left: 3rem;
+  }
 }

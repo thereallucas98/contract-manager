@@ -79,9 +79,9 @@ const CreateContract: React.FC = () => {
                 <p>Máximo de caracteres: 250</p>
               </div>
             </section>
-            <section>
-              <legend>Dados do Contrato</legend>
-              <div className="separator light"></div>
+            <section className="right">
+              {/* <legend>Dados do Contrato</legend>
+              <div className="separator light"></div> */}
               <div className="input-group">
                 <div className="input-wrapper">
                   <Select

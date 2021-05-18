@@ -1,29 +1,8 @@
 .client-content {
-  margin-left: 10rem;
-  padding: 0;
-  /* padding: 1rem 1.4rem; */
+  padding: 1rem;
 }
 
-.client-content form {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  padding: 0 2rem;
-}
-
-.client-content form .left-side {
-  width: 100vh;
-  margin-right: 1rem;
-  margin-top: -4.5rem;
-}
-
-.client-content form .right-side {
-  width: 100vh;
-  margin-left: 1rem;
-}
-
-.client-content  form fieldset {
+.client-content form fieldset {
   border: none;
 }
 
@@ -40,7 +19,7 @@
   line-height: 2.625rem;
 }
 
-.client-content .profile-content fieldset .separator {
+.client-content fieldset .separator {
   margin-bottom: 2rem;
 }
 
@@ -50,7 +29,9 @@
 }
 
 .client-content form .input-wrapper {
-  margin-top: 1.5rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .client-content label {
@@ -94,8 +75,7 @@
 .client-content button {
   background: var(--color-secundary);
   height: 3rem;
-  width: 6rem;
-  margin-left: 2rem;
+  width: 100%;
   transition: background-color 0.5s;
   color: #FFF;
   border-radius: 0.5rem;
@@ -106,30 +86,36 @@
   background: var(--color-secundary-dark);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   .client-content {
+    margin-left: 10rem;
+  }
+
+  .client-content form {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0;
-    padding: 1rem 1rem;
+    justify-content: space-around;
   }
-  .client-content form {
-    justify-content: center;
+
+  /* .client-content form fieldset {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     flex-direction: column;
-    padding: 0;
-  }
+  } */
 
   .client-content form .left-side {
-    margin: 0;
+    width: 100vh;
+    margin-right: 1rem;
+    margin-top: -4rem;
   }
-  .client-content form .input-group {
-    display: flex;
-    flex-direction: column;
+  
+  .client-content form .right-side {
+    width: 100vh;
+    margin-left: 1rem;
   }
 
-  .client-content form .input-wrapper {
-    width: 100% !important;
+  .client-content button {
+    width: 10rem;
   }
 }

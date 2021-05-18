@@ -5,11 +5,22 @@ import SidebarMenu from '../../components/SidebarMenu';
 import Select from '../../components/Select';
 import api from '../../services/api';
 import './styles.css';
+import Th from '../../components/Line';
 
 interface ICustomer {
   id: string;
   name: string;
   email: string;
+}
+
+interface IContracts {
+  id: string;
+  name: string;
+  code: string;
+  viability: number;
+  status: number;
+  expected_finished_date: string;
+  customer: ICustomer;
 }
 
 const Customers: React.FC = () => {
@@ -19,17 +30,43 @@ const Customers: React.FC = () => {
   const [type, setType] = useState('1');
 
   const [customers, setCustomers] = useState([]);
+  const [contracts, setContracts] = useState([]);
   const [total, setTotal] = useState(0);
+  const [totalContracts, setTotalContracts] = useState(0);
   const [limit, setLimit] = useState(5);
+  const [limitContracts, setLimitContracts] = useState(5);
   const [pages, setPages] = useState([]);
+  const [pagesContracts, setPagesContracts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentPageContract, setCurrentPageContract] = useState(1);
+
+  useEffect(() => {
+    async function loadContracts() {
+      const responseContracts = await api.get(`contracts?take=${limitContracts}&skip=${currentPageContract}`);
+      console.log(responseContracts.data);
+      setTotalContracts(responseContracts.data.total);
+      
+      const totalPages = Math.ceil(totalContracts / limitContracts);
+
+      const arrayPages = [];
+      for (let i = 1; i <= totalPages; i++) {
+        arrayPages.push(i);
+      }
+
+      setPagesContracts(arrayPages as []);
+      setContracts(responseContracts.data.contracts);
+    }
+
+    loadContracts();
+  }, [currentPageContract, limitContracts, totalContracts]);
+
 
   useEffect(() => {
     async function loadCustomers() {
       const response = await api.get(`customers?take=${limit}&skip=${currentPage}`
       );
-      console.log(response);
-      console.log(response.headers)
+      // console.log(response);
+      // console.log(response.headers)
       setTotal(response.data.total);
       const totalPages = Math.ceil(total / limit);
 
@@ -50,6 +87,11 @@ const Customers: React.FC = () => {
     setLimit(e.target.value);
     setCurrentPage(1);
   }, []);
+
+  const limitsContract = useCallback((e) => {
+    setLimitContracts(e.target.value);
+    setCurrentPageContract(1);
+  }, [])
 
   return (
     <div>
@@ -177,53 +219,94 @@ const Customers: React.FC = () => {
                       );
                     })
                   ) : (
-                    <tr>
-                        <td data-label="Código">ABDC</td>
-                        <td data-label="Nome">TESTE</td>
-                        <td data-label="Viabilidade">ALTA</td>
-                        <td data-label="Status">EM ANDAMENTO</td>
-                        <td data-label="Cliente">STEVE ROGERS</td>
-                        <td data-label="Previsão de Conclusão">20/10/2021</td>
-                        <td date-label="#">
-                          <button className="actions-buttons" title="Visualização Detalhada">
-                            <FiEye size={25} />
-                          </button>
-                          <button className="actions-buttons" title="Editar Contrato">
-                            <FiEdit size={25} />
-                          </button>
-                          <button className="actions-buttons" title="Excluir Contrato">
-                            <FiDelete size={25} />
-                          </button>
-                        </td>
-                      </tr>
+                    contracts.map((contract: IContracts) => {
+                      return (
+                        <tr key={contract.id}>
+                          <td data-label="Código">{contract.code}</td>
+                          <td data-label="Nome">{contract.name}</td>
+                          <td data-label="Viabilidade">
+                            {
+                              contract.viability === 0 ? 'Visiblidade Baixa' :
+                                contract.viability === 1 ? 'Visibilidade Moderada Baixa' :
+                                  contract.viability === 2 ? 'Visiblidade Moderada' :
+                                    contract.viability === 3 ? 'Visibilidade Moderada Alta' : 'Visibilidade Alta'
+                            }
+                          </td>
+                          <td data-label="Status">
+                            {
+                              contract.status === 0 ? 'Parado' :
+                                contract.status === 1 ? 'Em Andamento' : 'Finalizado'
+                            }
+                          </td>
+                          <td data-label="Cliente">{contract.customer.name}</td>
+                          <Th dateToConvert={contract.expected_finished_date} />
+                          <td date-label="#">
+                            <button className="actions-buttons" title="Visualização Detalhada">
+                              <FiEye size={25} />
+                            </button>
+                            <button className="actions-buttons" title="Editar Contrato">
+                              <FiEdit size={25} />
+                            </button>
+                            <button className="actions-buttons" title="Excluir Contrato">
+                              <FiDelete size={25} />
+                            </button>
+                          </td>
+                        </tr>
+                      )
+                    })
                   )
                 }
               </tbody>
             </table>
           </section>
           <div className="pagination">
-            {/* <span>Total de Páginas {total}</span> */}
-            <div className="pagination-button">
-              {currentPage > 1 && (
-                <button onClick={() => setCurrentPage(currentPage - 1)}>
-                  <FiArrowLeft size={25} />
-                </button>
-              )}
-              {pages.map((page) => (
-                <div
-                  className={page === currentPage ? 'selected-page item' : ' item'}
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                >
-                  {page}
+            {
+              type === '1' ? (
+                <div className="pagination-button">
+                  {currentPage > 1 && (
+                    <button onClick={() => setCurrentPage(currentPage - 1)}>
+                      <FiArrowLeft size={25} />
+                    </button>
+                  )}
+                  {pages.map((page) => (
+                    <div
+                      className={page === currentPage ? 'selected-page item' : ' item'}
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </div>
+                  ))}
+                  {currentPage < pages.length && (
+                    <button onClick={() => setCurrentPage(currentPage + 1)}>
+                      <FiArrowRight size={25} />
+                    </button>
+                  )}
                 </div>
-              ))}
-              {currentPage < pages.length && (
-                <button onClick={() => setCurrentPage(currentPage + 1)}>
-                  <FiArrowRight size={25} />
-                </button>
-              )}
-            </div>
+              ) : (
+                <div className="pagination-button">
+                  {currentPageContract > 1 && (
+                    <button onClick={() => setCurrentPage(currentPageContract - 1)}>
+                      <FiArrowLeft size={25} />
+                    </button>
+                  )}
+                  {pagesContracts.map((page) => (
+                    <div
+                      className={page === currentPageContract ? 'selected-page item' : ' item'}
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </div>
+                  ))}
+                  {currentPageContract < pagesContracts.length && (
+                    <button onClick={() => setCurrentPage(currentPageContract + 1)}>
+                      <FiArrowRight size={25} />
+                    </button>
+                  )}
+                </div>
+              )
+            }
           </div>
           <div className="footer-buttons">
             <Link to="create-client" className="button-create">Adicionar Cliente</Link>
