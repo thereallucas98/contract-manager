@@ -10,6 +10,8 @@ const getAllController = new GetAllController();
 
 // contractsRouter.use(isAuthenticated);
 
+contractsRouter.get('/total', getAllController.graphicTotal);
+
 contractsRouter.get('/list', getAllController.list);
 
 contractsRouter.get('/', contractsController.index);
