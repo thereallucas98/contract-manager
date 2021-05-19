@@ -6,12 +6,12 @@ import ProfileController from '../controllers/ProfileController';
 const profileRouter = Router();
 const profileController = new ProfileController();
 
-profileRouter.use(isAuthenticated);
+// profileRouter.use(isAuthenticated);
 
-profileRouter.get('/', profileController.show);
+profileRouter.get('/:id', profileController.show);
 
 profileRouter.put(
-  '/',
+  '/:id',
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
@@ -25,6 +25,9 @@ profileRouter.put(
           is: Joi.exist(),
           then: Joi.required(),
         }),
+    },
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
     },
   }),
   profileController.update,

@@ -5,22 +5,22 @@ import UpdateProfileService from '../services/UpdateProfileService';
 export default class ProfileController {
   public async show(request: Request, response: Response): Promise<Response> {
     const showProfile = new ShowProfileService();
-    const user_id = request.user.id;
+    const { id } = request.params;
     // console.log(request.user.id);
 
-    const users = await showProfile.execute({ user_id });
+    const users = await showProfile.execute({ id });
 
     return response.json(users);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { name, email, type, password, old_password } = request.body;
-    const user_id = request.user.id;
+    const { id } = request.params;
 
     const updateProfile = new UpdateProfileService();
 
     const user = await updateProfile.execute({
-      user_id,
+      user_id: id,
       name,
       email,
       type,
