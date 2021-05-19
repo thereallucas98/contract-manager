@@ -11,7 +11,13 @@ const CardHeader: React.FC<IHeader> = ({ timeQuantity, amount }) => {
     <div className="card-content">
       <h1>Vence em {timeQuantity} dias</h1>
       <span>
-        Existem {amount} contratos para vencer
+        {
+          amount === 1 ? (
+            `Existe ${amount} apenas um contrato para vencer`
+          ) : (
+            `Existem ${amount} contratos para vencer`
+          ) 
+        }
       </span>
       <footer>Clique aqui para saber quais!</footer>
     </div>

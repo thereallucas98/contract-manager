@@ -23,13 +23,17 @@
     margin: 0 0.2rem;
   }
 
-  .card-content span,
   .card-content footer {
     display: none;
   }
 
+  .card-content span {
+    margin-top: 0.5rem;
+    text-align: justify;
+  }
+
   .card-content h1 {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 }
 
