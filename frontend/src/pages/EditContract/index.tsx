@@ -1,37 +1,25 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
-import { makeCode } from '../../utils/GenerateCode';
+// import { makeCode } from '../../utils/GenerateCode';
 import api from '../../services/api';
 import Select from '../../components/Select';
 import SidebarMenu from '../../components/SidebarMenu';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
-interface ICustomer {
-  id: string;
-  name: string;
-}
+// interface ICustomer {
+//   id: string;
+//   name: string;
+// }
 
 interface ClientParams {
   id: string;
 }
 
 const EditContract: React.FC = () => {
-  useEffect(() => {
-    async function loadClients() {
-      const response = await api.get('customers/list');
-      console.log(response.data);
-
-      setCustomerList(response.data);
-    }
-
-    loadClients();
-  }, [])
 
   const params = useParams<ClientParams>();
-
-  const [customerList, setCustomerList] = useState([]);
   const [owner, setOwner] = useState('');
   const [ownerName, setOwnerName] = useState('');
   const [name, setName] = useState('');
@@ -51,7 +39,7 @@ const EditContract: React.FC = () => {
       setStatus(response.data.status);
 
     })
-  }, [])
+  }, [params.id])
 
   async function handleEditContract(e: FormEvent) {
     e.preventDefault();

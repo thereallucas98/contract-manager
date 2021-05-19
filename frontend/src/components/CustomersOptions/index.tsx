@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
-import { FiEye, FiEdit, FiDelete } from 'react-icons/fi';
-import ModalCustomer from '../ModalCustomer';
+import { FiEdit, FiDelete } from 'react-icons/fi';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,7 +16,6 @@ export interface ICustomerItemProps {
 
 const CustomersOptions: React.FC<ICustomerItemProps> = ({ customerColumn }) => {
   const history = useHistory();
-  const [showModal, setModal] = useState(false);
 
   function handleEdit() {
     history.push(`customer/${customerColumn.id}`)
@@ -40,16 +38,10 @@ const CustomersOptions: React.FC<ICustomerItemProps> = ({ customerColumn }) => {
     toast.info('Cliente não foi removido.')
   }
 
-  // function modalCustomer() {
-  //   setModal(!showModal);
-  // }
 
   return (
     <>
       <td date-label="#">
-        {/* <button className="actions-buttons" title="Visualização Detalhada" onClick={modalCustomer}>
-          <FiEye size={25} />
-        </button> */}
         <button className="actions-buttons" title="Editar Contrato" onClick={handleEdit}>
           <FiEdit size={25} />
         </button>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FiEye, FiEdit, FiDelete, FiPlus, FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import SidebarMenu from '../../components/SidebarMenu';
-import CustomersOptions, {ICustomerItemProps } from '../../components/CustomersOptions';
-import ColumnOptions, { IContractItemProps } from '../../components/ColumnOptions';
+import CustomersOptions from '../../components/CustomersOptions';
+import ColumnOptions from '../../components/ColumnOptions';
 import Select from '../../components/Select';
 import Th from '../../components/Line';
 import api from '../../services/api';

@@ -51,6 +51,13 @@ export const AuthProvider: React.FC = ({ children }) => {
         password,
       }
 
+      const response = await api.post('users', data).then(() => {
+        signIn(email, password);
+      }).catch((error) => {
+        toast.error(error);
+      });
+
+      console.log(response);
 
 
     } catch (error) {
@@ -60,10 +67,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
   }
 
-  async function loadStorageUser(user: object, token: string) {
-    await localStorage.setItem("AUTH:user", JSON.stringify(user));
-    await localStorage.setItem("AUTH:token", token);
-  }
+  // async function loadStorageUser(user: object, token: string) {
+  //   await localStorage.setItem("AUTH:user", JSON.stringify(user));
+  //   await localStorage.setItem("AUTH:token", token);
+  // }
 
   async function signIn(email: string, password: string) {
     try {
@@ -84,7 +91,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       setUser(user);
 
       history.push('/');
-      toast.info(`É muito bom ter vocẽ de volta ${user?.name}`);
+      toast.info(`É muito bom ter você ${user?.name}!`);
     } catch (error) {
       if (error.response?.data) {
         console.log(error.response.data.error);
@@ -94,7 +101,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   async function signOut() {
     localStorage.clear();
-
+    toast.info('Foi muito bom ter você aqui, até a próxima.')
     setUser(null);
     setLoading(false);
 

@@ -18,7 +18,7 @@ const Th: React.FC<ThProps> = ({ dateToConvert }) => {
     }
 
     loadDate();
-  }, [])
+  }, [dateToConvert])
   
   return (
     <>

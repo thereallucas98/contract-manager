@@ -1,7 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
-import { FiEye, FiEdit, FiDelete } from 'react-icons/fi';
+import { FiEdit, FiDelete } from 'react-icons/fi';
 import api from '../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 

@@ -4,8 +4,10 @@ import SidebarMenu from '../../components/SidebarMenu';
 import api from '../../services/api';
 import './styles.css';
 
+
 const Profile: React.FC = () => {
   const { user } = useAuth();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +17,7 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     async function loadUserData() {
-      const response = await api.get(`profile`)
+      const response = await api.get(`profile/${user?.id}`)
 
       console.log(response.data);
 

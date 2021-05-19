@@ -9,7 +9,7 @@ interface SidebarMenuProps {
 }
 
 const SidebarMenu: React.FC<SidebarMenuProps> = ({ currentPathName }) => {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   async function handeSignOut() {
     signOut();
@@ -32,7 +32,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ currentPathName }) => {
             Clientes
           </Link>
 
-          <Link to="/profile" className={currentPathName === '/profile' ? 'selected' : ''}>
+          <Link to={`/profile/${user?.id}`} className={currentPathName === '/profile' ? 'selected' : ''}>
             <FiSettings size={30} />
             Meu Perfil
           </Link>

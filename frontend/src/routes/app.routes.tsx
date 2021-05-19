@@ -19,7 +19,7 @@ const AuthRoutes: React.FC = () => {
       <BrowserRouter>
         <Route path="/" exact component={Dashboard} />
         <Route path="/customers" exact component={Customers} />
-        <Route path="/profile" exact component={Profile} />
+        <Route path="/profile/:id" exact component={Profile} />
         <Route path="/create-client" exact component={CreateClient} />
         <Route path="/customer/:id" exact component={EditClient} />
         <Route path="/create-contract" exact component={CreateContract} />

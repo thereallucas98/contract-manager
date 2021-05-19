@@ -5,10 +5,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
 const Login: React.FC = () => {
-  const { signIn } = useAuth();
+  const { signIn, signUp } = useAuth();
 
   const [option, setOption] = useState('1');
-  const [nameLogin, setNameLogin] = useState('');
   const [nameCreate, setNameCreate] = useState('');
   const [emailLogin, setEmailLogin] = useState('');
   const [emailCreate, setEmailCreate] = useState('');
@@ -26,7 +25,7 @@ const Login: React.FC = () => {
 
   async function handleCreate(e: FormEvent) {
     e.preventDefault();
-    toast.info('Create')
+    await signUp(nameCreate, emailCreate, passwordCreate);
   }
 
   return (
