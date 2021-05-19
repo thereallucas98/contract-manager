@@ -1,10 +1,10 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import api from '../../services/api';
 import SidebarMenu from '../../components/SidebarMenu';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
-import api from '../../services/api';
 
 interface IBGEUFResponse {
   sigla: string;

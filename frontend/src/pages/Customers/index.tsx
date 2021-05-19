@@ -2,10 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { FiEye, FiEdit, FiDelete, FiPlus, FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import SidebarMenu from '../../components/SidebarMenu';
+import CustomersOptions, {ICustomerItemProps } from '../../components/CustomersOptions';
+import ColumnOptions, { IContractItemProps } from '../../components/ColumnOptions';
 import Select from '../../components/Select';
+import Th from '../../components/Line';
 import api from '../../services/api';
 import './styles.css';
-import Th from '../../components/Line';
 
 interface ICustomer {
   id: string;
@@ -25,8 +27,8 @@ interface IContracts {
 
 const Customers: React.FC = () => {
 
-  const [viability, setViability] = useState('');
-  const [status, setStatus] = useState('');
+  const [viability, setViability] = useState('1');
+  const [status, setStatus] = useState('0');
   const [type, setType] = useState('1');
 
   const [customers, setCustomers] = useState([]);
@@ -42,10 +44,10 @@ const Customers: React.FC = () => {
 
   useEffect(() => {
     async function loadContracts() {
-      const responseContracts = await api.get(`contracts?take=${limitContracts}&skip=${currentPageContract}`);
+      const responseContracts = await api.get(`contracts?take=${limitContracts}&skip=${currentPageContract}&status=${status}&viability=${viability}`);
       console.log(responseContracts.data);
       setTotalContracts(responseContracts.data.total);
-      
+
       const totalPages = Math.ceil(totalContracts / limitContracts);
 
       const arrayPages = [];
@@ -58,7 +60,7 @@ const Customers: React.FC = () => {
     }
 
     loadContracts();
-  }, [currentPageContract, limitContracts, totalContracts]);
+  }, [currentPageContract, limitContracts, totalContracts, status, viability, contracts]);
 
 
   useEffect(() => {
@@ -81,7 +83,7 @@ const Customers: React.FC = () => {
     }
 
     loadCustomers();
-  }, [currentPage, limit, total]);
+  }, [currentPage, limit, total, customers]);
 
   const limits = useCallback((e) => {
     setLimit(e.target.value);
@@ -92,6 +94,10 @@ const Customers: React.FC = () => {
     setLimitContracts(e.target.value);
     setCurrentPageContract(1);
   }, [])
+
+  // async function handleDeleteProject(id: string) {
+  //   alert(id);
+  // }
 
   return (
     <div>
@@ -146,29 +152,6 @@ const Customers: React.FC = () => {
                   onChange={e => setStatus(e.target.value)}
                 />
               </div>
-              {/* <div className="select-wrapper">
-              <label htmlFor="start_date">Data de Início</label>
-              <input
-                type="date"
-                id="start_date"
-                name="start_date"
-                value={startDate}
-                onChange={e => setStartDate(e.target.value)}
-              />
-            </div> */}
-              <div className="select-wrapper">
-                <span></span>
-                <button className="button">
-                  Filtrar
-              </button>
-              </div>
-
-              <div className="select-wrapper">
-                <span></span>
-                <button className="button delete">
-                  Limpar
-              </button>
-              </div>
             </div>
           </div>
           <section>
@@ -204,17 +187,7 @@ const Customers: React.FC = () => {
                           {/* <td data-label="Código">{customer.id}</td> */}
                           <td data-label="Nome">{customer.name}</td>
                           <td data-label="Email">{customer.email}</td>
-                          <td date-label="#">
-                            <button className="actions-buttons" title="Visualização Detalhada">
-                              <FiEye size={25} />
-                            </button>
-                            <button className="actions-buttons" title="Editar Contrato">
-                              <FiEdit size={25} />
-                            </button>
-                            <button className="actions-buttons" title="Excluir Contrato">
-                              <FiDelete size={25} />
-                            </button>
-                          </td>
+                          <CustomersOptions customerColumn={customer} />
                         </tr>
                       );
                     })
@@ -240,17 +213,7 @@ const Customers: React.FC = () => {
                           </td>
                           <td data-label="Cliente">{contract.customer.name}</td>
                           <Th dateToConvert={contract.expected_finished_date} />
-                          <td date-label="#">
-                            <button className="actions-buttons" title="Visualização Detalhada">
-                              <FiEye size={25} />
-                            </button>
-                            <button className="actions-buttons" title="Editar Contrato">
-                              <FiEdit size={25} />
-                            </button>
-                            <button className="actions-buttons" title="Excluir Contrato">
-                              <FiDelete size={25} />
-                            </button>
-                          </td>
+                          <ColumnOptions customerColumn={contract} />
                         </tr>
                       )
                     })

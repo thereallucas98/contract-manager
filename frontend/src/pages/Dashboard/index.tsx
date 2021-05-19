@@ -1,5 +1,6 @@
 import React from 'react';
 import CardHeader from '../../components/CardHeader';
+import DonutChart from '../../components/DonutChart';
 import SidebarMenu from '../../components/SidebarMenu';
 import './styles.css';
 
@@ -15,7 +16,8 @@ const Dashboard: React.FC = () => {
           <CardHeader timeQuantity={4} amount={10} />
         </header>
         <main>
-          Gráficos
+          <h1>Dados sobre Contratos</h1>
+          <DonutChart />
         </main>
       </div>
     </>

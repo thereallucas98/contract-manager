@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
+import { toast } from 'react-toastify';
 import { makeCode } from '../../utils/GenerateCode';
 import api from '../../services/api';
 import Select from '../../components/Select';
 import SidebarMenu from '../../components/SidebarMenu';
+import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
 interface ICustomer {
@@ -24,13 +26,52 @@ const CreateContract: React.FC = () => {
 
 
   const [customerList, setCustomerList] = useState([]);
-  const [customer, setCustomer] = useState('');
+  const [owner, setOwner] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [viability, setViability] = useState('');
   const [status, setStatus] = useState('');
   const [startDate, setStartDate] = useState('');
   const [expectedFinishedDate, setExpectedFinishedDate] = useState('');
+
+  async function handleCreateContract(e: FormEvent) {
+    e.preventDefault();
+    const result = [name, description, viability, status, startDate, expectedFinishedDate].every(e => e === '');
+
+    if (result === true) {
+      toast.error('Alguns campos importantes se encontram vazio, por favor verifique!')
+    }
+
+    let startDateUTC = new Date(startDate);
+    let expectedFinishDateUTC = new Date(expectedFinishedDate);
+
+    const data = {
+      name,
+      description,
+      code: makeCode(6),
+      viability: Number(viability),
+      status: Number(status),
+      start_date: String(startDateUTC.toISOString()),
+      expected_finished_date: String(expectedFinishDateUTC.toISOString()),
+      owner,
+    }
+
+    await api.post('contracts', data).then(() => {
+      toast.success('Contrato cadastrado com sucesso')
+    }).catch((error) => {
+      toast.error(error);
+    });
+
+    console.log(data);
+
+    setName('');
+    setDescription('');
+    setViability('');
+    setStatus('');
+    setStartDate('');
+    setExpectedFinishedDate('');
+    setOwner('');
+  }
 
   return (
     <>
@@ -48,8 +89,8 @@ const CreateContract: React.FC = () => {
                 <select
                   name="customer"
                   id="customer"
-                  value={customer}
-                  onChange={e => setCustomer(e.target.value)}
+                  value={owner}
+                  onChange={e => setOwner(e.target.value)}
                 >
                   <option value="0">Selecione um Cliente</option>
                   {customerList.map((customer: ICustomer) => (
@@ -88,11 +129,11 @@ const CreateContract: React.FC = () => {
                     name="type"
                     label="Viabilidade"
                     options={[
-                      { value: 1, label: 'Visibilidade Baixa' },
-                      { value: 2, label: 'Visibilidade Moderada Baixa' },
-                      { value: 3, label: 'Visibilidade Moderada' },
-                      { value: 4, label: 'Visibilidade Moderada Alta' },
-                      { value: 5, label: 'Visibilidade Alta' }
+                      { value: 0, label: 'Visibilidade Baixa' },
+                      { value: 1, label: 'Visibilidade Moderada Baixa' },
+                      { value: 2, label: 'Visibilidade Moderada' },
+                      { value: 3, label: 'Visibilidade Moderada Alta' },
+                      { value: 4, label: 'Visibilidade Alta' }
                     ]}
                     value={viability}
                     onChange={e => setViability(e.target.value)}
@@ -138,7 +179,7 @@ const CreateContract: React.FC = () => {
               </div>
             </section>
           </fieldset>
-          <button>Cadastrar Contrato</button>
+          <button onClick={handleCreateContract}>Cadastrar Contrato</button>
         </form>
       </div>
     </>

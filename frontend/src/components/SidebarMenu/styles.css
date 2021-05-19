@@ -48,7 +48,8 @@
 }
 
 .sidebar-menu .paths a svg,
-.sidebar-menu a svg {
+.sidebar-menu a svg,
+.sidebar-menu button svg {
   margin-right: .5em;
 }
 

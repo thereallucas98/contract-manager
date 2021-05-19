@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/auth';
 import { FiHome, FiUser, FiSettings, FiLogOut } from 'react-icons/fi';
 import './styles.css';
 
@@ -8,6 +9,12 @@ interface SidebarMenuProps {
 }
 
 const SidebarMenu: React.FC<SidebarMenuProps> = ({ currentPathName }) => {
+  const { signOut } = useAuth();
+
+  async function handeSignOut() {
+    signOut();
+  }
+  
   return (
     <div className="sidebar-menu">
       <section className="profile-photo">
@@ -31,7 +38,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ currentPathName }) => {
           </Link>
         </div>
       </section>
-      <Link to="/">
+      <Link to="" onClick={handeSignOut}>
         <FiLogOut size={30} />
           Sair
       </Link>
