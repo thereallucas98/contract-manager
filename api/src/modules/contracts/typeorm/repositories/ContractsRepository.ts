@@ -18,6 +18,7 @@ class ContractsRepository extends Repository<Contract> {
       where: {
         id,
       },
+      relations: ['customer'],
     });
 
     return contract;

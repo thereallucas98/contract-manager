@@ -38,12 +38,14 @@ export class CreateContracts1621173701353 implements MigrationInterface {
             type: 'timestamp',
           },
           {
-            name: 'expeccted_finished_date',
+            name: 'expected_finished_date',
             type: 'timestamp',
           },
           {
             name: 'finished_date',
             type: 'timestamp',
+            isNullable: true,
+            default: null,
           },
           {
             name: 'created_at',

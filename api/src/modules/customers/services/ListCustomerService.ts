@@ -8,7 +8,7 @@ class ListCustomerService {
 
     const customers = await customersRepository.find({
       take,
-      skip,
+      skip: skip - 1,
     });
 
     return customers;

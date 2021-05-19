@@ -1,16 +1,26 @@
 import { Request, Response } from 'express';
+import CountContractsService from '../services/CountContractsService';
 import CreateContractService from '../services/CreateContractService';
 import DeleteContractService from '../services/DeleteContractService';
 import ListContractService from '../services/ListContractService';
 import ShowContractService from '../services/ShowContractService';
+import UpdateContractService from '../services/UpdateContractService';
 
 export default class ContractsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listContracts = new ListContractService();
+    const countContracts = new CountContractsService();
+    const { take = 10, skip = 1, status, viability } = request.query;
+    const contracts = await listContracts.execute({
+      take,
+      skip,
+      status,
+      viability,
+    });
 
-    const contracts = await listContracts.execute();
+    const total = await countContracts.execute();
 
-    return response.json(contracts);
+    return response.json({ contracts, total });
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
@@ -25,7 +35,7 @@ export default class ContractsController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     const {
-      customer,
+      owner,
       name,
       description,
       code,
@@ -39,7 +49,6 @@ export default class ContractsController {
     const createContract = new CreateContractService();
 
     const contract = await createContract.execute({
-      customer,
       name,
       description,
       code,
@@ -48,6 +57,7 @@ export default class ContractsController {
       start_date,
       expected_finished_date,
       finished_date,
+      owner,
     });
 
     return response.json(contract);
@@ -61,5 +71,25 @@ export default class ContractsController {
     await deleteContract.execute({ id });
 
     return response.json([]);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { name, description, viability, status, finished_date } =
+      request.body;
+
+    const { id } = request.params;
+
+    const updateContract = new UpdateContractService();
+
+    const contract = await updateContract.execute({
+      id,
+      name,
+      description,
+      viability,
+      status,
+      finished_date,
+    });
+
+    return response.json(contract);
   }
 }
