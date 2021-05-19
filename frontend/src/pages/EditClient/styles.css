@@ -1,0 +1,121 @@
+.client-content {
+  padding: 1rem;
+}
+
+.client-content form fieldset {
+  border: none;
+}
+
+.client-content form fieldset + fieldset {
+  margin-top: 3.5rem;
+}
+
+.client-content form fieldset legend {
+  color: var(--color-card-title);
+
+  font-family: Roboto Condensed;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 2.625rem;
+}
+
+.client-content fieldset .separator {
+  margin-bottom: 2rem;
+}
+
+.client-content form .input-group {
+  display: flex;
+  margin-top: 1.5rem;
+}
+
+.client-content form .input-wrapper {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.client-content label {
+  display: inline-block;
+
+  font-family: Roboto Condensed;
+  font-weight: 500;
+  color: #787880;
+
+  margin-bottom: 1rem;
+}
+
+.client-content input,
+.client-content select {
+  font-family: Roboto Condensed;
+  font-weight: 500;
+
+  height: 3rem;
+
+  background: #FCFDFF;
+
+  border: 1px solid #E1E3E6;
+  border-radius: .313rem;
+
+  padding: 0.75rem 1.5rem;
+
+  width: 100%;
+
+  color: var(--color-card-label);
+  margin-bottom: 1rem;
+}
+
+::placeholder {
+  color: var(--color-card-label);
+}
+
+.input-wrapper{
+  width: 100%;
+}
+
+.client-content button {
+  background: var(--color-secundary);
+  height: 3rem;
+  width: 100%;
+  transition: background-color 0.5s;
+  color: #FFF;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.client-content button:hover {
+  background: var(--color-secundary-dark);
+}
+
+@media screen and (min-width: 768px) {
+  .client-content {
+    margin-left: 10rem;
+  }
+
+  .client-content form {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  /* .client-content form fieldset {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+  } */
+
+  .client-content form .left-side {
+    width: 100vh;
+    margin-right: 1rem;
+    margin-top: -4rem;
+  }
+  
+  .client-content form .right-side {
+    width: 100vh;
+    margin-left: 1rem;
+  }
+
+  .client-content button {
+    width: 10rem;
+  }
+}

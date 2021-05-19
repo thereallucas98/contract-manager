@@ -45,7 +45,7 @@ const Customers: React.FC = () => {
   useEffect(() => {
     async function loadContracts() {
       const responseContracts = await api.get(`contracts?take=${limitContracts}&skip=${currentPageContract}&status=${status}&viability=${viability}`);
-      console.log(responseContracts.data);
+      // console.log(responseContracts.data);
       setTotalContracts(responseContracts.data.total);
 
       const totalPages = Math.ceil(totalContracts / limitContracts);
@@ -79,7 +79,7 @@ const Customers: React.FC = () => {
 
       setPages(arrayPages as []);
       setCustomers(response.data.customers);
-      console.log(response.data.customers);
+      // console.log(response.data.customers);
     }
 
     loadCustomers();
