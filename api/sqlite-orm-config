@@ -1,13 +1,14 @@
 {
   "type": "sqlite",
-  "database": "./src/database/database.sqlite",
-  "migrations": ["./src/database/migrations/*.ts"],
-  "entities": ["./src/models/*.ts"],
+  "database": "./src/shared/typeorm/database.sqlite",
+  "migrations": ["./src/shared/typeorm/migrations/*.ts"],
+  "entities": ["./src/modules/**/typeorm/entities/*.ts"],
   "logging": false,
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./src/shared/typeorm/migrations"
   }
 }
+
 ////
 {
   "type": "postgres",
