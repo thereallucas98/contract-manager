@@ -8,7 +8,7 @@ coverage
 ormconfig.json
 dist
 
-/src/shared/typeorm/*.sqlite
+/src/shared/typeorm/*.sqlite3
 
 uploads/*
 !uploads/.gitkeep
