@@ -35,7 +35,7 @@ const Customers: React.FC = () => {
   const [contracts, setContracts] = useState([]);
   const [total, setTotal] = useState(0);
   const [totalContracts, setTotalContracts] = useState(0);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(2);
   const [limitContracts, setLimitContracts] = useState(5);
   const [pages, setPages] = useState([]);
   const [pagesContracts, setPagesContracts] = useState([]);
@@ -65,20 +65,20 @@ const Customers: React.FC = () => {
 
   useEffect(() => {
     async function loadCustomers() {
-      const response = await api.get(`customers?take=${limit}&skip=${currentPage}`
+      const response = await api.get(`customers/list?per_page=${limit}&page=${currentPage}`
       );
       // console.log(response);
       // console.log(response.headers)
       setTotal(response.data.total);
       const totalPages = Math.ceil(total / limit);
-
+      
       const arrayPages = [];
       for (let i = 1; i <= totalPages; i++) {
         arrayPages.push(i);
       }
-
+      
       setPages(arrayPages as []);
-      setCustomers(response.data.customers);
+      setCustomers(response.data.data);
       // console.log(response.data.customers);
     }
 
