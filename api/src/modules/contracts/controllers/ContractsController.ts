@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import CountContractsService from '../services/CountContractsService';
 import CreateContractService from '../services/CreateContractService';
 import DeleteContractService from '../services/DeleteContractService';
 import ListContractService from '../services/ListContractService';
@@ -9,18 +8,10 @@ import UpdateContractService from '../services/UpdateContractService';
 export default class ContractsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listContracts = new ListContractService();
-    const countContracts = new CountContractsService();
-    const { take = 10, skip = 1, status, viability } = request.query;
-    const contracts = await listContracts.execute({
-      take,
-      skip,
-      status,
-      viability,
-    });
+    const { status, viability } = request.query;
+    const contracts = await listContracts.execute();
 
-    const total = await countContracts.execute();
-
-    return response.json({ contracts, total });
+    return response.json(contracts);
   }
 
   public async show(request: Request, response: Response): Promise<Response> {

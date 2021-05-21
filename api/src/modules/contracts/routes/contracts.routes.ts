@@ -2,17 +2,13 @@ import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 // import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 import ContractsController from '../controllers/ContractsController';
-import GetAllController from '../controllers/GetAllController';
 
 const contractsRouter = Router();
 const contractsController = new ContractsController();
-const getAllController = new GetAllController();
 
 // contractsRouter.use(isAuthenticated);
 
-contractsRouter.get('/total', getAllController.graphicTotal);
-
-contractsRouter.get('/list', getAllController.list);
+// contractsRouter.get('/total', getAllController.graphicTotal);
 
 contractsRouter.get('/', contractsController.index);
 

@@ -16,9 +16,11 @@ const CreateContract: React.FC = () => {
   useEffect(() => {
     async function loadClients() {
       const response = await api.get('customers/list');
-      console.log(response.data);
+      // console.log(response);
 
       setCustomerList(response.data);
+
+      // console.log(customerList);
     }
 
     loadClients();

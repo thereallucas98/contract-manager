@@ -22,7 +22,7 @@ interface IContracts {
   viability: number;
   status: number;
   expected_finished_date: string;
-  customer: ICustomer;
+  // customer: ICustomer;
 }
 
 const Customers: React.FC = () => {
@@ -35,7 +35,7 @@ const Customers: React.FC = () => {
   const [contracts, setContracts] = useState([]);
   const [total, setTotal] = useState(0);
   const [totalContracts, setTotalContracts] = useState(0);
-  const [limit, setLimit] = useState(2);
+  const [limit, setLimit] = useState(5);
   const [limitContracts, setLimitContracts] = useState(5);
   const [pages, setPages] = useState([]);
   const [pagesContracts, setPagesContracts] = useState([]);
@@ -44,7 +44,7 @@ const Customers: React.FC = () => {
 
   useEffect(() => {
     async function loadContracts() {
-      const responseContracts = await api.get(`contracts?take=${limitContracts}&skip=${currentPageContract}&status=${status}&viability=${viability}`);
+      const responseContracts = await api.get(`contracts?per_page=${limitContracts}&page=${currentPageContract}`);
       // console.log(responseContracts.data);
       setTotalContracts(responseContracts.data.total);
 
@@ -56,7 +56,7 @@ const Customers: React.FC = () => {
       }
 
       setPagesContracts(arrayPages as []);
-      setContracts(responseContracts.data.contracts);
+      setContracts(responseContracts.data.data);
     }
 
     loadContracts();
@@ -65,7 +65,7 @@ const Customers: React.FC = () => {
 
   useEffect(() => {
     async function loadCustomers() {
-      const response = await api.get(`customers/list?per_page=${limit}&page=${currentPage}`
+      const response = await api.get(`customers?per_page=${limit}&page=${currentPage}`
       );
       // console.log(response);
       // console.log(response.headers)
@@ -211,7 +211,7 @@ const Customers: React.FC = () => {
                                 contract.status === 1 ? 'Em Andamento' : 'Finalizado'
                             }
                           </td>
-                          <td data-label="Cliente">{contract.customer.name}</td>
+                          <td data-label="Cliente">---</td>
                           <Th dateToConvert={contract.expected_finished_date} />
                           <ColumnOptions customerColumn={contract} />
                         </tr>
