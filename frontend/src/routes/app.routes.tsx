@@ -10,7 +10,7 @@ import CreateContract from '../pages/CreateContract';
 import EditClient from '../pages/EditClient';
 import EditContract from '../pages/EditContract';
 
-const AuthRoutes: React.FC = () => {
+const AppRoutes: React.FC = () => {
   const { loading } = useAuth();
   if (loading) {
     return <Loading />
@@ -29,4 +29,4 @@ const AuthRoutes: React.FC = () => {
   }
 }
 
-export default AuthRoutes;
+export default AppRoutes;

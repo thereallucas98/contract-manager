@@ -22,13 +22,13 @@ interface IContracts {
   viability: number;
   status: number;
   expected_finished_date: string;
-  // customer: ICustomer;
+  customer: ICustomer;
 }
 
 const Customers: React.FC = () => {
 
-  const [viability, setViability] = useState('1');
-  const [status, setStatus] = useState('0');
+  const [viability, setViability] = useState('5');
+  const [status, setStatus] = useState('1');
   const [type, setType] = useState('1');
 
   const [customers, setCustomers] = useState([]);
@@ -44,9 +44,9 @@ const Customers: React.FC = () => {
 
   useEffect(() => {
     async function loadContracts() {
-      const responseContracts = await api.get(`contracts?per_page=${limitContracts}&page=${currentPageContract}`);
-      // console.log(responseContracts.data);
-      setTotalContracts(responseContracts.data.total);
+      const responseContracts = await api.get(`contracts?per_page=${limitContracts}&page=${currentPageContract}&status=${status}&viability=${viability}`);
+      // console.log(responseContracts.headers);
+      setTotalContracts(responseContracts.headers['X-Total-Count']);
 
       const totalPages = Math.ceil(totalContracts / limitContracts);
 
@@ -56,7 +56,8 @@ const Customers: React.FC = () => {
       }
 
       setPagesContracts(arrayPages as []);
-      setContracts(responseContracts.data.data);
+      // console.log(pagesContracts);
+      setContracts(responseContracts.data);
     }
 
     loadContracts();
@@ -127,11 +128,11 @@ const Customers: React.FC = () => {
                   label="Viabilidade"
                   title={type === '1' ? 'Filtro inexistente na Tabela de Clientes' : 'Realize o Filtro por Viabilidade'}
                   options={[
-                    { value: 1, label: 'Visibilidade Baixa' },
-                    { value: 2, label: 'Visibilidade Moderada Baixa' },
-                    { value: 3, label: 'Visibilidade Moderada' },
-                    { value: 4, label: 'Visibilidade Moderada Alta' },
-                    { value: 5, label: 'Visibilidade Alta' }
+                    { value: 0, label: 'Visibilidade Baixa' },
+                    { value: 1, label: 'Visibilidade Moderada Baixa' },
+                    { value: 2, label: 'Visibilidade Moderada' },
+                    { value: 3, label: 'Visibilidade Moderada Alta' },
+                    { value: 4, label: 'Visibilidade Alta' }
                   ]}
                   value={viability}
                   onChange={e => setViability(e.target.value)}
@@ -208,10 +209,11 @@ const Customers: React.FC = () => {
                           <td data-label="Status">
                             {
                               contract.status === 0 ? 'Parado' :
-                                contract.status === 1 ? 'Em Andamento' : 'Finalizado'
+                                contract.status === 1 ? 'Em Andamento' :
+                                contract.status === 2 ? 'Cancelado' : 'Concluído'
                             }
                           </td>
-                          <td data-label="Cliente">---</td>
+                          <td data-label="Cliente">{contract.customer.name}</td>
                           <Th dateToConvert={contract.expected_finished_date} />
                           <ColumnOptions customerColumn={contract} />
                         </tr>

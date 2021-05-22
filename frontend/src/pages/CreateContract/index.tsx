@@ -146,8 +146,8 @@ const CreateContract: React.FC = () => {
                     name="type"
                     label="Situação"
                     options={[
-                      { value: 0, label: 'Planejado' },
-                      { value: 1, label: 'Em Desenvolvimento' },
+                      { value: 0, label: 'Parado' },
+                      { value: 1, label: 'Em Andamento' },
                       { value: 2, label: 'Cancelado' },
                       { value: 3, label: 'Concluído' }
                     ]}
