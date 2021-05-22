@@ -1,12 +1,13 @@
-import { getCustomRepository, ILike } from 'typeorm';
-import Contract from '../typeorm/entities/Contract';
+import { getCustomRepository } from 'typeorm';
 import ContractsRepository from '../typeorm/repositories/ContractsRepository';
 
 class GraphicContractsService {
-  public async execute(): Promise<any> {
+  public async execute(): Promise<any[number]> {
     const contractsRepository = getCustomRepository(ContractsRepository);
 
     const total = await contractsRepository.count();
+
+    // console.log('total' + total);
 
     return total;
   }

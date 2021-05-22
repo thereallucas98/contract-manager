@@ -4,12 +4,24 @@ import DeleteContractService from '../services/DeleteContractService';
 import ListContractService from '../services/ListContractService';
 import ShowContractService from '../services/ShowContractService';
 import UpdateContractService from '../services/UpdateContractService';
+import GraphicContractsService from '../services/GraphicContractsService';
 
 export default class ContractsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listContracts = new ListContractService();
-    const { status, viability } = request.query;
-    const contracts = await listContracts.execute();
+    const graphicContracts = new GraphicContractsService();
+
+    const count = await graphicContracts.execute();
+
+    const { status, viability, page, per_page } = request.query;
+    const contracts = await listContracts.execute({
+      page,
+      per_page,
+      status,
+      viability,
+    });
+
+    response.header('X-Total-Count', count);
 
     return response.json(contracts);
   }
