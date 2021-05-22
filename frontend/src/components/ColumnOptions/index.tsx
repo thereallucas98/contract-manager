@@ -24,7 +24,7 @@ const ColumnOptions: React.FC<IContractItemProps> = ({ customerColumn }) => {
   async function handleDelete() {
     const data = String(customerColumn.id);
 
-    const result = window.confirm('Está ação irá deletar todos o contrato do cliente.')
+    const result = window.confirm('Está ação irá deletar o contrato. Deseja prosseguir?')
 
     if (result) {
       await api.delete(`contracts/${data}`).then(() => {
